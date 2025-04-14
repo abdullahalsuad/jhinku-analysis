@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import DataInput from "./Input/DataInput";
-import ShowReport from "./Report/showReport";
+import ShowReport from "./Report/ShowReport";
 import StudentTable from "./Table/StudentTable";
 
 const DataLayout = () => {
