@@ -5,8 +5,8 @@ export const TableRow = ({ student, handleRemoveStudent }) => {
 
   return (
     <tr className="bg-white text-xl border-b border-gray-200 hover:bg-gray-50 transition-colors">
-      <td className="px-6 py-4">{studentName}</td>
       <td className="px-6 py-4">{rollNumber}</td>
+      <td className="px-6 py-4">{studentName}</td>
       <td className="px-6 py-4">{average}</td>
 
       <td className="px-6 py-4">
