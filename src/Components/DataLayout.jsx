@@ -9,8 +9,6 @@ const DataLayout = () => {
 
   // Add Student
   let addStudent = (studentData) => {
-    
-
     //check duplicate
     let isDuplicate = students.some(
       (student) => student.rollNumber === studentData.rollNumber
@@ -35,7 +33,6 @@ const DataLayout = () => {
       average: studentData.average,
     };
 
-
     setStudent((prev) => [...prev, newStudent]);
     toast.success("🎉 Student added successfully!", {
       position: "top-right",
@@ -44,6 +41,16 @@ const DataLayout = () => {
     });
   };
 
+  // Remove student from table
+  let handleRemoveStudent = (id) => {
+    setStudent((prev) => prev.filter((student) => student.id !== id));
+
+    toast.info("🗑️ Student removed", {
+      position: "top-right",
+      autoClose: 3000,
+      theme: "light",
+    });
+  };
   return (
     <>
       <div className="mt-6 mb-6">
@@ -51,7 +58,10 @@ const DataLayout = () => {
       </div>
 
       <div className="mt-6 mb-6 w-10/12 mx-auto bg-[#fdfdfdda] shadow-m rounded-md p-4">
-        <StudentTable students={students} />
+        <StudentTable
+          students={students}
+          handleRemoveStudent={handleRemoveStudent}
+        />
       </div>
 
       <div className="mt-4 w-10/12 mx-auto bg-[#fdfdfdda] shadow-m rounded-md p-4">
