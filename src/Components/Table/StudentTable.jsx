@@ -10,7 +10,13 @@ const StudentTable = ({ students }) => {
             <thead className=" text-gray-700 text-[18px] uppercase bg-gray-100">
               <tr>
                 <th scope="col" className="px-6 py-3">
+                  Roll
+                </th>
+                <th scope="col" className="px-6 py-3">
                   Name
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Average
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Marks

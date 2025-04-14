@@ -4,51 +4,64 @@ import { toast } from "react-toastify";
 const DataInput = ({ addStudent }) => {
   const [studentData, setStudentData] = useState({
     studentName: "",
-    marks: "",
+    rollNumber: "",
+    mark1: "",
+    mark2: "",
+    mark3: "",
   });
 
   // handling change
   let handleChange = (event) => {
-    let key = event.target.name;
-    let value = event.target.value;
+    let { name, value } = event.target;
 
-    // Prevent negative numbers
-    if (value < 0) {
-      value = 0;
-    }
-
-    setStudentData({ ...studentData, [key]: value });
+    setStudentData((prev) => ({
+      ...prev,
+      [name]: value < 0 ? 0 : value,
+    }));
   };
 
   // hading submission
   let handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!studentData.studentName || !studentData.marks) {
-      toast.warn("🦄 please fil up first", {
+    let { studentName, rollNumber, mark1, mark2, mark3 } = studentData;
+
+    if (
+      !studentName ||
+      !rollNumber ||
+      mark1 === "" ||
+      mark2 === "" ||
+      mark3 === ""
+    ) {
+      toast.warn("🦄 Please fill all fields!", {
         position: "top-right",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
         theme: "light",
       });
-    } else {
-      toast.success("Data Added Successfully !!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      setStudentData({ ...studentData, studentName: "", marks: "" });
-      addStudent(studentData);
+      return;
     }
+
+    const avg = (parseFloat(mark1) + parseFloat(mark2) + parseFloat(mark3)) / 3;
+
+    const studentWithAvg = {
+      studentName,
+      rollNumber,
+      mark1: parseFloat(mark1),
+      mark2: parseFloat(mark2),
+      mark3: parseFloat(mark3),
+      average: parseFloat(avg.toFixed(2)),
+    };
+
+    addStudent(studentWithAvg);
+
+    // Reset form
+    setStudentData({
+      studentName: "",
+      rollNumber: "",
+      mark1: "",
+      mark2: "",
+      mark3: "",
+    });
   };
 
   return (
@@ -56,68 +69,94 @@ const DataInput = ({ addStudent }) => {
       <div className="mt-4 flex items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
           <h2 className="text-2xl font-semibold text-gray-700 mb-6">
-            Add Data
+            Add Student
           </h2>
           <form className="space-y-5" onSubmit={handleSubmit}>
-            {/* Name Field */}
-            <div className="flex gap-4">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-gray-600 font-medium mb-1"
-                >
-                  Name
-                </label>
-                <input
-                  onChange={handleChange}
-                  name="studentName"
-                  value={studentData?.studentName}
-                  type="text"
-                  id="name"
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#123458]"
-                />
-              </div>
+            {/* Name */}
+            <div>
+              <label className="block text-gray-600 font-medium mb-1">
+                Name
+              </label>
+              <input
+                type="text"
+                name="studentName"
+                value={studentData.studentName}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border rounded-md"
+              />
+            </div>
 
-              {/* Marks Field */}
+            {/* Roll Number */}
+            <div>
+              <label className="block text-gray-600 font-medium mb-1">
+                Roll Number
+              </label>
+              <input
+                type="number"
+                name="rollNumber"
+                value={studentData.rollNumber}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border rounded-md"
+              />
+            </div>
+
+            {/* Marks */}
+            <div className="grid grid-cols-3 gap-4">
               <div>
-                <label
-                  htmlFor="marks"
-                  className="block text-gray-600 font-medium mb-1"
-                >
-                  Marks
+                <label className="block text-gray-600 font-medium mb-1">
+                  Mark 1
                 </label>
                 <input
                   type="number"
-                  name="marks"
-                  value={studentData?.marks}
-                  id="marks"
+                  name="mark1"
+                  value={studentData.mark1}
                   min="0"
+                  onChange={handleChange}
                   required
-                  onChange={(event) => {
-                    let value = event.target.value;
+                  className="w-full px-4 py-2 border rounded-md"
+                />
+              </div>
 
-                    // Automatically set value to 0 if it's negative
-                    if (parseInt(value) < 0) {
-                      event.target.value = 0;
-                    }
+              <div>
+                <label className="block text-gray-600 font-medium mb-1">
+                  Mark 2
+                </label>
+                <input
+                  type="number"
+                  name="mark2"
+                  value={studentData.mark2}
+                  min="0"
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-md"
+                />
+              </div>
 
-                    handleChange(event); // Call your handleChange after modifying value
-                  }}
-                  className=" w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#123458]"
+              <div>
+                <label className="block text-gray-600 font-medium mb-1">
+                  Mark 3
+                </label>
+                <input
+                  type="number"
+                  name="mark3"
+                  value={studentData.mark3}
+                  min="0"
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-md"
                 />
               </div>
             </div>
 
-            {/* Submit Button */}
-            <div>
-              <button
-                type="submit"
-                className="w-full bg-[#123458] hover:bg-[#F16767] cursor-pointer text-white font-semibold py-2 px-4 rounded-md transition"
-              >
-                Add
-              </button>
-            </div>
+            {/* Submit */}
+            <button
+              type="submit"
+              className="w-full bg-[#123458] hover:bg-[#F16767] text-white font-semibold py-2 px-4 rounded-md"
+            >
+              Add
+            </button>
           </form>
         </div>
       </div>
