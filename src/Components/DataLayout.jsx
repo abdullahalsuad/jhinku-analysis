@@ -24,10 +24,12 @@ const DataLayout = () => {
   console.log(students);
   return (
     <>
-      <DataInput addStudent={addStudent} />
+      <div className="mt-6 mb-6">
+        <DataInput addStudent={addStudent} />
+      </div>
 
-      <div className="mt-4 w-10/12 mx-auto bg-[#fdfdfdda] shadow-m rounded-md p-4">
-        <StudentTable />
+      <div className="mt-6 mb-6 w-10/12 mx-auto bg-[#fdfdfdda] shadow-m rounded-md p-4">
+        <StudentTable students={students} />
       </div>
 
       <div className="mt-4 w-10/12 mx-auto bg-[#fdfdfdda] shadow-m rounded-md p-4">
