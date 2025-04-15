@@ -13,6 +13,7 @@ export const TableRow = ({ student, handleRemoveStudent }) => {
       <td className="px-6 py-4">
         {mark1}, {mark2}, {mark3}
       </td>
+
       <td className="px-6 py-4">
         <button
           onClick={() => handleRemoveStudent(id)}
