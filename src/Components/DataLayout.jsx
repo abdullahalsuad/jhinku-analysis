@@ -53,18 +53,20 @@ const DataLayout = () => {
   };
   return (
     <>
-      <div className="mt-6 mb-6">
-        <DataInput addStudent={addStudent} />
+      <div className="grid grid-cols-12 mt-10 mb-6">
+        <div className="col-span-4">
+          <DataInput addStudent={addStudent} />
+        </div>
+
+        <div className="  bg-[#fdfdfdda] border border-gray-200 shadow-m rounded-md p-4 col-span-8">
+          <StudentTable
+            students={students}
+            handleRemoveStudent={handleRemoveStudent}
+          />
+        </div>
       </div>
 
-      <div className="mt-6 mb-6 w-10/12 mx-auto bg-[#fdfdfdda] shadow-m rounded-md p-4">
-        <StudentTable
-          students={students}
-          handleRemoveStudent={handleRemoveStudent}
-        />
-      </div>
-
-      <div className="mt-4 w-10/12 mx-auto bg-[#fdfdfdda] shadow-m rounded-md p-4">
+      <div className="mt-4  mx-auto bg-[#fdfdfdda] shadow-m rounded-md p-4">
         <ShowReport students={students} />
       </div>
 

@@ -66,7 +66,7 @@ const DataInput = ({ addStudent }) => {
 
   return (
     <>
-      <div className="mt-4 flex items-center justify-center">
+      <div className="flex items-center ">
         <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
           <h2 className="text-2xl font-semibold text-gray-700 mb-6">
             Add Student

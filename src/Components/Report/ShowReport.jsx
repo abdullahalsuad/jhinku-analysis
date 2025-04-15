@@ -1,4 +1,5 @@
 import React from "react";
+import { FileText } from "lucide-react";
 import {
   BarChart,
   Bar,
@@ -20,7 +21,7 @@ const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const student = payload[0].payload;
     return (
-      <div className="bg-white border p-3 rounded shadow text-sm">
+      <div className="bg-white border border-gray-400 p-3 rounded shadow text-sm">
         <p className="font-semibold">
           {student.studentName} (Roll: {student.rollNumber})
         </p>
@@ -161,7 +162,15 @@ const ShowReport = ({ students }) => {
           </div>
         </>
       ) : (
-        <p className="text-center text-gray-600">Please add data first !!</p>
+        <div className="flex justify-center items-center h-full py-10">
+          <div className="text-center">
+            <FileText size={40} className="mx-auto mb-4 text-[#123458]" />
+            <h2 className="text-lg font-semibold mb-2">No Data Available</h2>
+            <p className="text-gray-600 mb-4">
+              Please add some data to get started.
+            </p>
+          </div>
+        </div>
       )}
     </>
   );
