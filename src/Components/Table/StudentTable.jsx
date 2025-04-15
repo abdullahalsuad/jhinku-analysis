@@ -1,5 +1,6 @@
 import React from "react";
 import { TableRow } from "./TableRow";
+import TableHead from "./TableHead";
 
 const StudentTable = ({ students, handleRemoveStudent }) => {
   return (
@@ -8,23 +9,7 @@ const StudentTable = ({ students, handleRemoveStudent }) => {
         {students.length > 0 ? (
           <table className="w-full text-sm text-center text-black">
             <thead className=" text-gray-700 text-[18px] uppercase bg-gray-100">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  Roll
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Name
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Average
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Marks
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Action
-                </th>
-              </tr>
+              <TableHead />
             </thead>
             <tbody>
               {students.map((student) => (
